@@ -19,9 +19,14 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y gcc-aarch64-linux-gnu g++-aarch64-linux-gnu nasm python3 make git build-essential uuid-dev device-tree-compiler
 
+      - name: Clone submodule repos directly
+        run: |
+          git clone --depth 1 https://github.com/tianocore/edk2.git Common/edk2
+          git clone --depth 1 https://github.com/tianocore/edk2-platforms.git Common/edk2-platforms
+          git clone --depth 1 https://github.com/BigfootACA/simple-init.git GPLDrivers/Library/SimpleInit
+
       - name: Build UEFI for onclite
         run: |
-          git submodule update --init
           ./build.sh --device onclite --release RELEASE
 
       - name: Upload UEFI artifacts
