@@ -17,7 +17,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y aarch64-linux-gnu-gcc nasm python3 dtc make git build-essential uuid-dev
+          sudo apt-get install -y gcc-aarch64-linux-gnu g++-aarch64-linux-gnu nasm python3 make git build-essential uuid-dev device-tree-compiler
 
       - name: Build UEFI for onclite
         run: |
