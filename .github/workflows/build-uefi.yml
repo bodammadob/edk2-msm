@@ -1,0 +1,32 @@
+name: Build UEFI Firmware
+
+on:
+  push:
+    branches: [onclite]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout edk2-msm
+        uses: actions/checkout@v4
+        with:
+          ref: onclite
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y aarch64-linux-gnu-gcc nasm python3 dtc make git build-essential uuid-dev
+
+      - name: Build UEFI for onclite
+        run: |
+          ./build.sh --device onclite --release RELEASE
+
+      - name: Upload UEFI artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: edk2-msm-uefi
+          path: |
+            Build/onclite/RELEASE_GCC5/boot.img
+            Build/onclite/RELEASE_GCC5/FV/MSM8953_UEFI.fd
