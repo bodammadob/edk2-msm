@@ -21,6 +21,7 @@ jobs:
 
       - name: Build UEFI for onclite
         run: |
+          git submodule update --init
           ./build.sh --device onclite --release RELEASE
 
       - name: Upload UEFI artifacts
