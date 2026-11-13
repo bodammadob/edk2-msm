@@ -22,6 +22,7 @@ jobs:
       - name: Clone submodule repos directly
         run: |
           git clone --depth 1 https://github.com/tianocore/edk2.git Common/edk2
+          git -C Common/edk2 submodule update --init
           git clone --depth 1 https://github.com/tianocore/edk2-platforms.git Common/edk2-platforms
           git clone --depth 1 https://github.com/BigfootACA/simple-init.git GPLDrivers/Library/SimpleInit
 
